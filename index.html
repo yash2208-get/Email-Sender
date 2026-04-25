@@ -1,139 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Job Email Sender Pro</title>
+  <meta charset="UTF-8">
+  <title>Job Email Sender Pro</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
 
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            width: 420px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            animation: fadeIn 0.6s ease-in-out;
-        }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      width: 420px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: fadeIn 0.6s ease-in-out;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+    .input-group {
+      margin-bottom: 15px;
+    }
 
-        .input-group {
-            margin-bottom: 15px;
-        }
+    label {
+      font-size: 14px;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        label {
-            font-size: 14px;
-            color: #555;
-            display: block;
-            margin-bottom: 5px;
-        }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      transition: 0.3s;
+    }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            transition: 0.3s;
-        }
+    input:focus {
+      border-color: #4facfe;
+      outline: none;
+      box-shadow: 0 0 5px rgba(79,172,254,0.5);
+    }
 
-        input:focus {
-            border-color: #4facfe;
-            outline: none;
-            box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
-        }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+    .status {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+    }
 
-        .status {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #333;
-        }
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 12px;
-            color: #888;
-        }
-    </style>
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h2>📧 Job Email Sender</h2>
+<div class="container">
+  <h2>📧 Job Email Sender</h2>
 
-        <div class="input-group">
-            <label>HR Email</label>
-            <input type="email" id="to" placeholder="Enter HR email address">
-        </div>
+  <div class="input-group">
+    <label>HR Email</label>
+    <input type="email" id="to" placeholder="Enter HR email address">
+  </div>
 
-        <button onclick="openGmail()">🚀 Send via Gmail</button>
+  <button onclick="openGmail()">🚀 Send via Gmail</button>
 
-        <div class="status" id="status"></div>
-        <div class="footer">Made for Job Applications</div>
-    </div>
+  <div class="status" id="status"></div>
+  <div class="footer">Made for Job Applications</div>
+</div>
 
-    <script>
-        function openGmail() {
-            let to = document.getElementById("to").value;
+<script>
+function openGmail() {
 
-            if (!to) {
-                document.getElementById("status").innerText = "⚠️ Please enter email";
-                return;
-            }
+  let to = document.getElementById("to").value;
 
-            let subject = "Application for Software Engineer Position";
+  if (!to) {
+    document.getElementById("status").innerText = "⚠️ Please enter email";
+    return;
+  }
 
-            let message = `Dear Hiring Manager,
+  let subject = "Application for Software Engineer Position";
+
+  let message = `Dear Hiring Manager,
 
 I hope you are doing well.
 
@@ -154,14 +154,21 @@ Yash Maheshwari
 Phone: 8000553597
 Email: yashajmera1203@gmail.com`;
 
-            let gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  let gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
 
-            window.open(gmailURL, "_blank");
+  let mailtoURL = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
 
-            document.getElementById("status").innerText = "✅ Opening Gmail...";
-        }
-    </script>
+  let isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    window.location.href = mailtoURL;
+  } else {
+    window.open(gmailURL, "_blank");
+  }
+
+  document.getElementById("status").innerText = "✅ Opening email...";
+}
+</script>
 
 </body>
-
 </html>
