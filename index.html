@@ -1,307 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Job Email Sender Pro</title>
-    <style>
-        :root {
-            font-family: Inter, 'Segoe UI', Arial, sans-serif;
-            color: #17233c
-        }
+  <meta charset="UTF-8">
+  <title>Job Email Sender Pro</title>
 
-        * {
-            box-sizing: border-box
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at 10% 10%, #dbeafe, transparent 36%), radial-gradient(circle at 90% 80%, #e9d5ff, transparent 40%), #f6f8fc;
-            padding: 36px 16px
-        }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
 
-        .shell {
-            max-width: 1050px;
-            margin: auto
-        }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      width: 420px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: fadeIn 0.6s ease-in-out;
+    }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 26px
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .logo {
-            background: linear-gradient(135deg, #4f46e5, #9333ea);
-            color: white;
-            padding: 13px;
-            border-radius: 16px;
-            font-size: 23px;
-            box-shadow: 0 9px 24px #4f46e52c
-        }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        .brand h1 {
-            font-size: 24px;
-            margin: 0
-        }
+    .input-group {
+      margin-bottom: 15px;
+    }
 
-        .brand p {
-            color: #64748b;
-            margin: 4px 0 0;
-            font-size: 14px
-        }
+    label {
+      font-size: 14px;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        .layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px
-        }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      transition: 0.3s;
+    }
 
-        .panel {
-            background: #ffffffee;
-            border: 1px solid #e6eaf2;
-            border-radius: 22px;
-            padding: 27px;
-            box-shadow: 0 14px 45px #273b6812
-        }
+    input:focus {
+      border-color: #4facfe;
+      outline: none;
+      box-shadow: 0 0 5px rgba(79,172,254,0.5);
+    }
 
-        .panel h2 {
-            font-size: 19px;
-            margin: 0 0 5px
-        }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .sub {
-            font-size: 13px;
-            color: #64748b;
-            margin: 0 0 24px;
-            line-height: 1.5
-        }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
 
-        label {
-            display: block;
-            font-weight: 650;
-            font-size: 13px;
-            margin: 17px 0 7px
-        }
+    .status {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+    }
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #dce3ef;
-            border-radius: 11px;
-            background: #fbfcff;
-            font: inherit;
-            font-size: 14px;
-            color: #17233c;
-            outline: none;
-            transition: .2s
-        }
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
 
-        input:focus,
-        textarea:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 4px #6366f119
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 110px
-        }
-
-        .upload {
-            border: 2px dashed #b9c7e6;
-            border-radius: 13px;
-            padding: 15px;
-            background: #f8faff
-        }
-
-        .upload input {
-            background: white
-        }
-
-        .hint {
-            font-size: 12px;
-            color: #64748b;
-            line-height: 1.6;
-            margin: 8px 0
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 22px;
-            flex-wrap: wrap
-        }
-
-        button {
-            border: 0;
-            border-radius: 11px;
-            padding: 13px 16px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: .2s
-        }
-
-        button:hover {
-            transform: translateY(-2px)
-        }
-
-        .primary {
-            background: linear-gradient(120deg, #4f46e5, #7c3aed);
-            color: white;
-            flex: 1;
-            box-shadow: 0 9px 18px #4f46e52b
-        }
-
-        .secondary {
-            background: #edf0ff;
-            color: #4338ca
-        }
-
-        .notice {
-            background: #fff8e8;
-            border: 1px solid #f8df9a;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 12px;
-            line-height: 1.6;
-            color: #805b0b;
-            margin-top: 17px
-        }
-
-        .status {
-            font-size: 13px;
-            min-height: 18px;
-            margin-top: 13px;
-            color: #4338ca
-        }
-
-        .mail {
-            border: 1px solid #e2e8f0;
-            border-radius: 15px;
-            overflow: hidden;
-            background: #fff
-        }
-
-        .mailhead {
-            background: #f8faff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 16px
-        }
-
-        .mailhead p {
-            margin: 7px 0;
-            font-size: 13px;
-            overflow-wrap: anywhere
-        }
-
-        .mailbody {
-            padding: 19px;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-            font-size: 13px;
-            line-height: 1.7;
-            max-height: 620px;
-            overflow: auto
-        }
-
-        .pill {
-            display: inline-block;
-            background: #e9f9f0;
-            color: #16734b;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 14px
-        }
-
-        .foot {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 12px;
-            margin: 25px 0
-        }
-
-        @media(max-width:760px) {
-            .layout {
-                grid-template-columns: 1fr
-            }
-
-            .panel {
-                padding: 20px
-            }
-
-            .brand h1 {
-                font-size: 21px
-            }
-
-            body {
-                padding: 20px 12px
-            }
-        }
-    </style>
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <main class="shell">
-        <header class="brand">
-            <div class="logo">✉</div>
-            <div>
-                <h1>Job Email Sender <span style="color:#6d5ce7">Pro</span></h1>
-                <p>Prepare professional job applications in seconds</p>
-            </div>
-        </header>
-        <div class="layout">
-            <section class="panel">
-                <h2>Application Details</h2>
-                <p class="sub">Enter HR details, personalize your profile and preview before opening Gmail.</p>
-                <label for="to">HR Email Address *</label><input id="to" type="email" placeholder="hr@company.com"
-                    autocomplete="email" required>
-                <label for="subject">Email Subject</label><input id="subject"
-                    value="Job Application | Software Engineer | Backend & AI Developer">
-                <label for="linkedin">LinkedIn Profile URL</label><input id="linkedin" type="url"
-                    placeholder="https://www.linkedin.com/in/your-profile" value="https://www.linkedin.com/in/yash-maheshwari800055">
-                <label for="portfolio">Portfolio Website</label><input id="portfolio" type="url"
-                    value="https://yash-maheshwari.yash123-ajmer.workers.dev/">
-                <label for="resume">Attach Resume (PDF, DOC, DOCX)</label>
-                <div class="upload"><input id="resume" type="file"
-                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    <p class="hint" id="fileInfo">No file selected</p>
-                </div>
-                <div class="actions"><button class="primary" id="gmail">✉ Open in Gmail</button><button
-                        class="secondary" id="copy">Copy Email</button></div>
-                <div class="status" id="status" role="status" aria-live="polite"></div>
-                <div class="notice"><strong>Resume reminder:</strong> Your selected file cannot be transferred to Gmail
-                    by a browser link. After Gmail opens, click the paperclip icon and attach the resume manually.
-                    Opening Gmail does not send the email.</div>
-            </section>
-            <section class="panel"><span class="pill">● LIVE PREVIEW</span>
-                <h2>Email Preview</h2>
-                <p class="sub">This is the message that will be prepared in Gmail.</p>
-                <div class="mail">
-                    <div class="mailhead">
-                        <p><strong>To:</strong> <span id="previewTo">hr@company.com</span></p>
-                        <p><strong>Subject:</strong> <span id="previewSubject"></span></p>
-                        <p><strong>Resume:</strong> <span id="previewResume">Attach manually in Gmail</span></p>
-                    </div>
-                    <div class="mailbody" id="previewBody"></div>
-                </div>
-            </section>
-        </div>
-        <p class="foot">Made for Job Applications · Your details remain in this browser page</p>
-    </main>
-    <script>
-        const $ = id => document.getElementById(id);
-        const ids = ['to', 'subject', 'linkedin', 'portfolio'];
-        function getMessage() { const portfolio = $('portfolio').value.trim(); const linkedin = $('linkedin').value.trim(); return `Dear Hiring Manager,\n\nI hope you are doing well.\n\nI am writing to express my interest in suitable Software Engineer, Backend Developer, or AI Developer opportunities at your organization.\n\nI am a Software Engineer with 3+ years of experience in software development, specializing in backend development, REST API development, database management, and AI integrations.\n\nMy Technical Skills:\n• Backend: PHP, Laravel, Node.js, Express.js, Python, FastAPI\n• AI Technologies: LangChain, LLMs, OpenAI API, Google Gemini API, RAG\n• Frontend: HTML, CSS, JavaScript, jQuery, AJAX, Bootstrap\n• Databases: MySQL, MongoDB\n• Other: REST APIs, JWT Authentication, Git, GitHub, Third-Party API Integrations\n\nI have worked on projects including SaaS applications, HRMS platforms, insurance software, AI-powered applications, and web development solutions.${portfolio ? '\n\nPortfolio: ' + portfolio : ''}${linkedin ? '\nLinkedIn: ' + linkedin : ''}\n\nI have attached my updated resume for your review. I would appreciate the opportunity to discuss how my skills and experience can contribute to your organization.\n\nThank you for your time and consideration. I look forward to hearing from you.\n\nBest regards,\nYash Maheshwari\nSoftware Engineer | Backend & AI Developer${portfolio ? '\nPortfolio: ' + portfolio : ''}${linkedin ? '\nLinkedIn: ' + linkedin : ''}` }
-        function preview() { $('previewTo').textContent = $('to').value.trim() || 'hr@company.com'; $('previewSubject').textContent = $('subject').value; $('previewBody').textContent = getMessage(); const f = $('resume').files[0]; $('fileInfo').textContent = f ? `${f.name} (${(f.size / 1024 / 1024).toFixed(2)} MB) — attach manually in Gmail` : 'No file selected'; $('previewResume').textContent = f ? `${f.name} (not attached yet)` : 'Attach manually in Gmail' }
-        ids.forEach(id => $(id).addEventListener('input', preview)); $('resume').addEventListener('change', preview);
-        $('gmail').addEventListener('click', () => { const to = $('to'); if (!to.value.trim() || !to.checkValidity()) { to.reportValidity(); $('status').textContent = 'Please enter a valid HR email address.'; return } const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to.value.trim())}&su=${encodeURIComponent($('subject').value)}&body=${encodeURIComponent(getMessage())}`; const win = window.open(url, '_blank', 'noopener,noreferrer'); $('status').textContent = win ? 'Gmail compose opened. Please attach your resume before sending.' : 'If Gmail did not open, allow pop-ups and try again. Remember to attach your resume.' });
-        $('copy').addEventListener('click', async () => { const content = `To: ${$('to').value}\nSubject: ${$('subject').value}\n\n${getMessage()}`; try { await navigator.clipboard.writeText(content); $('status').textContent = 'Email copied successfully.' } catch (e) { const t = document.createElement('textarea'); t.value = content; document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); $('status').textContent = ok ? 'Email copied successfully.' : 'Unable to copy automatically. Please select and copy from the preview.' } }); preview();
-    </script>
+
+<div class="container">
+  <h2>📧 Job Email Sender</h2>
+
+  <div class="input-group">
+    <label>HR Email</label>
+    <input type="email" id="to" placeholder="Enter HR email address">
+  </div>
+
+  <button onclick="openGmail()">🚀 Send via Gmail</button>
+
+  <div class="status" id="status"></div>
+  <div class="footer">Made for Job Applications</div>
+</div>
+
+<script>
+function openGmail() {
+
+  let to = document.getElementById("to").value;
+
+  if (!to) {
+    document.getElementById("status").innerText = "⚠️ Please enter email";
+    return;
+  }
+
+  let subject = "Job Application | Software Engineer | Backend & AI Developer";
+
+  let message = `Dear Hiring Manager,
+
+I hope you are doing well.
+
+I am writing to express my interest in suitable Software Engineer / Backend Developer / AI Developer opportunities at your organization.
+
+I am a Software Engineer with 3+ years of experience in software development, specializing in backend development, REST API development, database management, and AI integrations.
+
+My Technical Skills:
+- Backend: PHP, Laravel, Node.js, Express.js, Python, FastAPI
+- AI Technologies: LangChain, LLMs, OpenAI API, Google Gemini API, RAG
+- Frontend: HTML, CSS, JavaScript, jQuery, AJAX, Bootstrap
+- Databases: MySQL, MongoDB
+- Other: REST APIs, JWT Authentication, Git, GitHub, Third-Party API Integrations
+
+I have worked on various projects, including SaaS applications, HRMS platforms, insurance software, AI-powered applications, and web development solutions.
+
+My Portfolio:
+https://yash-maheshwari.yash123-ajmer.workers.dev/
+
+LinkedIn Profile:
+https://www.linkedin.com/in/yash-maheshwari800055
+
+I have attached my updated resume for your review. I would appreciate the opportunity to discuss how my technical skills and experience can contribute to your organization.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Best regards,  
+Yash Maheshwari  
+Software Engineer | Backend & AI Developer  
+Portfolio: https://yash-maheshwari.yash123-ajmer.workers.dev/  
+LinkedIn: https://www.linkedin.com/in/yash-maheshwari800055
+`;
+
+  let gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+  let mailtoURL = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+  let isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    window.location.href = mailtoURL;
+  } else {
+    window.open(gmailURL, "_blank");
+  }
+
+  document.getElementById("status").innerText = "✅ Opening email...";
+}
+</script>
+
 </body>
 </html>
